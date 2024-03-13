@@ -14,22 +14,24 @@ import LEVEL1 from './components/LEVEL-1'
 import Game from './components/LEVEL-2';
 import Puzzle from './components/LEVEL-3';
 import ImgReader from './components/LEVEL-4';
+import GuessPass from './components/LEVEL-5';
 function App() {
   return (
        
  
- <div>
+  <div>
     <BrowserRouter>
-  <Routes>
-<Route path = "/" element = {<Home/>}/>
-<Route path = "/LEVEL-1" element = {<LEVEL1/>}/>
-<Route path = "/LEVEL-2" element = {<Game/>}/>
-<Route path = "/LEVEL-3" element = {<Puzzle/>}/>
-<Route path = "/LEVEL-4" element = {<ImgReader/>}/>
-  </Routes>
-  </BrowserRouter> 
+        <Routes>
+              <Route path = "/" element = {<Home/>}/>
+              <Route path = "/LEVEL-1" element = {<LEVEL1/>}/>
+              <Route path = "/LEVEL-2" element = {<Game/>}/>
+              <Route path = "/LEVEL-3" element = {<Puzzle/>}/>
+              <Route path = "/LEVEL-4" element = {<ImgReader/>}/>
+              <Route path = "/LEVEL-5" element = {<GuessPass />} />
+        </Routes>
+    </BrowserRouter> 
    
-</div>
+  </div>
   );
 }
 
