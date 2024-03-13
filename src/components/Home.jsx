@@ -53,7 +53,7 @@ function Home() {
     <div className="text-white relative " style={{ backgroundImage: `url(${b})`, backgroundPosition: 'center', color: 'red', overflow: 'hidden' }}>
       <Header />
       <motion.div className="grid grid-cols-3 grid-rows-5 gap-3 mx-4 my-2">
-        {[1, 2, 3, 4, 5].map((item) => (
+        {[1, 2, 3, 4, 5,6].map((item) => (
           <motion.div
             key={item}
             className="relative bg-gradient-to-r from-green-500 via-red-500 to-blue-500 my-6 mx-4 rounded-tr-3xl"
@@ -92,6 +92,8 @@ function getBackgroundImage(item) {
     case 4:
       return levelImag;
     case 5:
+      return levelImag5;
+    case 6:
       return levelImag5;
     default:
       return '';
