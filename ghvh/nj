@@ -1,0 +1,6 @@
+  <BrowserRouter>
+  <Routes>
+
+<Route path = "/LEVEL1" element = {<Counter/>}/>
+  </Routes>
+  </BrowserRouter> 
