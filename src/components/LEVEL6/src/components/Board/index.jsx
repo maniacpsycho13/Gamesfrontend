@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import Box from "../Box";
 import words from "../../words";
+import { countState } from "../../../../../../src/store/atoms/countState";
+import { useRecoilState } from "recoil";
+import { useNavigate } from 'react-router-dom';
 
 const correct =
   words[Math.floor(Math.random() * words.length - 1)].toUpperCase();
@@ -27,6 +30,8 @@ function Board(props) {
   const [win, setWin] = useState(false);
   const [lost, setLost] = useState(false);
   const [message, setMessage] = useState("");
+  const [value,setValue]=useRecoilState(countState);
+  const Navigate = useNavigate();
 
   useEffect(() => {
     if (win || lost) {
@@ -85,7 +90,10 @@ function Board(props) {
                   if (correctLetters === 5) {
                     setWin(true);
                     setTimeout(() => {
+                      setValue(7);
                       setMessage("You WIN");
+                      Navigate("/LEVEL-7");
+
                     }, 750);
                   }
                   return prevBoard;

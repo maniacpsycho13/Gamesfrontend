@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useRecoilState } from 'recoil';
 import { countState } from '../store/atoms/countState';
+import { useNavigate } from 'react-router-dom';
 
 const Square = ({ value, onClick }) => (
   <button
@@ -52,8 +53,11 @@ const Game = () => {
     if (winner === 'X') {
       
       localStorage.setItem('count', value + 1 );
+      console.log(parseInt(localStorage.getItem('count')));
     }
   }, [winner]);
+
+  const Navigate=useNavigate();
 
   const makeMove = (index) => {
     if (squares[index] || winner) {
@@ -70,6 +74,9 @@ const Game = () => {
       setWinner(currentWinner);
       if (currentWinner === 'X') {
         setPlayerWins(playerWins + 1);
+        setCount(3);
+        Navigate('/LEVEL-3');
+        
       } else if (currentWinner === 'O') {
         setComputerWins(computerWins + 1);
       }

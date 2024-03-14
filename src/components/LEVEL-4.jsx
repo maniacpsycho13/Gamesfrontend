@@ -1,8 +1,11 @@
 import * as loadImage from 'blueimp-load-image';
 import React, { Component } from 'react';
 import comicImage from '../assets/comic.png'; // Ensure this path is correct
-
+import { useRecoilState } from 'recoil';
+import { countState } from '../store/atoms/countState';
+import { useNavigate } from 'react-router-dom';
 class ImgReader extends Component {
+    
     constructor(props) {
         super(props);
         this.state = {
@@ -10,6 +13,7 @@ class ImgReader extends Component {
             displayExif: false
         };
     }
+    
 
     parseInfo = (e) => { // Converted to an arrow function for correct 'this' binding
         let files = e.target.files;
@@ -21,16 +25,23 @@ class ImgReader extends Component {
             });
         }
     };
-
+    
     handleSubmit = () => {
+        
+        const Navigate = useNavigate();
+        const [count, setCount] = useRecoilState(countState);
         if (this.state.exifData && this.state.exifData.Model === 'NIKON D5300') {
+            setCount(5);
+            Navigate('/LEVEL-5');
             alert("You've found the image"); // Show an alert if the EXIF model is NIKON D5300
         }
         this.setState({ displayExif: true }); // Always set this to true to display the EXIF data
     };
 
     render() {
-        return (
+        
+        return  (
+
             <div className="max-w-md mx-auto my-10 p-5 border rounded-lg shadow-lg bg-white">
                 <div className="mb-5">
                     <img src={comicImage} alt="Comic" className="mb-3 w-auto" /> {/* Displaying the comic image */}
