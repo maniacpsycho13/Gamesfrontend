@@ -1,20 +1,16 @@
 // src/App.js
 import React from 'react';
-import level2Imag from './assets/LEVEL-2.png';
-import levelImag3 from './assets/LEVEL-3.png';
-import levelImag from './assets/LEVEL-4.png';
-import levelImag5 from './assets/LEVEL-5.png';
-import { RecoilRoot } from 'recoil';
 
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import Home from './components/Home';
-import LEVEL1 from './components/LEVEL-1'
+import LEVEL1 from './components/LEVEL-1';
 
 import Game from './components/LEVEL-2';
 import Puzzle from './components/LEVEL-3';
 import ImgReader from './components/LEVEL-4';
 import GuessPass from './components/LEVEL-5';
+import LEVEL6 from './components/LEVEL6';
 function App() {
   return (
        
@@ -28,6 +24,9 @@ function App() {
               <Route path = "/LEVEL-3" element = {<Puzzle/>}/>
               <Route path = "/LEVEL-4" element = {<ImgReader/>}/>
               <Route path = "/LEVEL-5" element = {<GuessPass />} />
+              <Route path = "/LEVEL-6" element = {<LEVEL6/>}/>
+
+              
         </Routes>
     </BrowserRouter> 
    
