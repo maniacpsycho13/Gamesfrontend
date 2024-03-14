@@ -5,6 +5,12 @@ import levelImag3 from '../assets/LEVEL-3.png';
 import levelImag from '../assets/LEVEL-4.png';
 import levelImag5 from '../assets/LEVEL-5.png';
 import b from '../assets/9746162.jpg';
+import levelImag6 from "../assets/LEVEL-6.png";
+import levelImag7 from "../assets/LEVEL-7.png";
+import levelImag8 from "../assets/LEVEL-8.png";
+import levelImag9 from "../assets/LEVEL-9.png";
+
+
 import { RecoilRoot } from 'recoil';
 import { BrowserRouter, Route, Routes, useNavigate } from 'react-router-dom';
 
@@ -53,7 +59,7 @@ function Home() {
     <div className="text-white relative " style={{ backgroundImage: `url(${b})`, backgroundPosition: 'center', color: 'red', overflow: 'hidden' }}>
       <Header />
       <motion.div className="grid grid-cols-3 grid-rows-5 gap-3 mx-4 my-2">
-        {[1, 2, 3, 4, 5,6].map((item) => (
+        {[1, 2, 3, 4, 5,6,7,8,9].map((item) => (
           <motion.div
             key={item}
             className="relative bg-gradient-to-r from-green-500 via-red-500 to-blue-500 my-6 mx-4 rounded-tr-3xl"
@@ -94,7 +100,13 @@ function getBackgroundImage(item) {
     case 5:
       return levelImag5;
     case 6:
-      return levelImag5;
+      return levelImag6;
+    case 7:
+      return levelImag7;
+    case 8:
+      return levelImag8;  
+    case 9:
+      return levelImag9; 
     default:
       return '';
   }

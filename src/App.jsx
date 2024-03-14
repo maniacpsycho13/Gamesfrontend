@@ -1,7 +1,9 @@
-// src/App.js
 import React from 'react';
 
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+
+// Importing Navbar
+import Navbar from './components/navbar';
 
 import Home from './components/Home';
 import LEVEL1 from './components/LEVEL-1';
@@ -16,10 +18,10 @@ import Level6 from './components/LEVEL-6';
 
 function App() {
   return (
-       
- 
-  <div>
-    <BrowserRouter>
+    <div>
+      <BrowserRouter>
+        {/* Insert Navbar outside of Routes but inside BrowserRouter */}
+        <Navbar />
         <Routes>
               <Route path = "/" element = {<Home/>}/>
               <Route path = "/LEVEL-1" element = {<LEVEL1/>}/>
@@ -31,9 +33,8 @@ function App() {
               <Route path = "/LEVEL-7" element = {<Puzzle/>}/>
               
         </Routes>
-    </BrowserRouter> 
-   
-  </div>
+      </BrowserRouter> 
+    </div>
   );
 }
 
