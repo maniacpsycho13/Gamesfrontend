@@ -3,10 +3,12 @@ import { countState } from "../store/atoms/countState";
 import { useRecoilState } from "recoil";
 import { motion } from "framer-motion";
 import y from '../assets/Arena.jpg';
+import { useNavigate } from 'react-router-dom';
 
 function LEVEL1() {
   const [value, setValue] = useRecoilState(countState);
   const [response, setResponse] = useState('');
+  const navigate = useNavigate();
 
   const handleInputChange = (e) => {
     setResponse(e.target.value);
@@ -15,8 +17,10 @@ function LEVEL1() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (response.toLowerCase() === "cede") {
-      
+      alert("You've found the word");
+      navigate('/LEVEL-2')
       setValue(2); // Update value to 2 if "cede" is entered
+
     }
 
     console.log('Form submitted with response:', response);
@@ -24,7 +28,7 @@ function LEVEL1() {
 
   return (
     <div
-      className="text-white relative flex flex-col justify-center items-center "
+      className="text-black relative flex flex-col justify-center items-center "
       style={{
         backgroundImage: `url(${y})`,
         backgroundPosition: 'center',

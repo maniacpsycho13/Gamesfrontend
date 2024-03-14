@@ -1,14 +1,16 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { countState } from "../store/atoms/countState";
 import { useRecoilState } from "recoil";
+import { useNavigate } from 'react-router-dom';
 
-const GuessPass = () => {
+function GuessPass(){
   const [positions, setPositions] = useState(Array.from({ length: 10 }, () => ({ x: 0, y: 0 })));
   const [velocities, setVelocities] = useState(Array.from({ length: 10 }, () => ({ x: 1, y: 1 })));
   const [containerSize, setContainerSize] = useState({ width: 400, height: 300 });
   const [value, setValue] = useState('');
   const ballSize = 20;
   const [value1,setValue1]=useRecoilState(countState);
+  const Navigate = useNavigate();
 
   const containerRef = useRef(null);
 
@@ -62,11 +64,14 @@ const GuessPass = () => {
     console.log(value);
     if(value === 'ISDF@CRACK'){
       setValue1(6); 
+      alert("You've found the password");
+      Navigate('/LEVEL-6');
     }
     
   }
 
-  return (
+  return  (
+    
     <div className='flex flex-col justify-center items-center gap-4'>
       <h1 className="text-3xl font-bold mb-4">Guess Password</h1>
       <div className="w-96 h-96 border border-black relative" ref={containerRef}>
@@ -88,7 +93,7 @@ const GuessPass = () => {
       <input type="text" className="bg-gray-200 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5" placeholder='Guess The Password' onChange={(e) => setValue(e.target.value)}></input>
       <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={clickHandler}>Submit</button>
     </div>
-  );
-};
+  ) 
+}
 
 export default GuessPass;
