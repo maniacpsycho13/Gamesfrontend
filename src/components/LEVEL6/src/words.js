@@ -2996,6 +2996,11 @@ const words = [
   "zones",
   "virus",
   "vixen",
+  "paper",
+  "vomit",
+  "voter",
+  "votes",
+  
 
 
 
