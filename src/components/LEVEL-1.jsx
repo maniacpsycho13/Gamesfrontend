@@ -18,7 +18,7 @@ function LEVEL1() {
     e.preventDefault();
     if (response.toLowerCase() === "cede") {
 
-      localStorage.setItem('count', value + 1);
+      localStorage.setItem('count', 2);
       console.log(localStorage.getItem('count'));
 
       alert("You've found the word");

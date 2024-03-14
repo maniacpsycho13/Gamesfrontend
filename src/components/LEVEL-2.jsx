@@ -3,6 +3,7 @@ import { useRecoilState } from 'recoil';
 import { countState } from '../store/atoms/countState';
 import { useNavigate } from 'react-router-dom';
 
+
 const Square = ({ value, onClick }) => (
   <button
     className="square bg-gray-200 hover:bg-gray-300 text-black font-bold py-4 px-6 rounded-md m-1"
@@ -52,7 +53,7 @@ const Game = () => {
   useEffect(() => {
     if (winner === 'X') {
       
-      localStorage.setItem('count', value + 1 );
+      localStorage.setItem('count', 3 );
       console.log(parseInt(localStorage.getItem('count')));
     }
   }, [winner]);
@@ -73,6 +74,8 @@ const Game = () => {
     if (currentWinner) {
       setWinner(currentWinner);
       if (currentWinner === 'X') {
+        localStorage.setItem('count', 3 );
+        console.log(parseInt(localStorage.getItem('count')));
         setPlayerWins(playerWins + 1);
         setCount(3);
         Navigate('/LEVEL-3');

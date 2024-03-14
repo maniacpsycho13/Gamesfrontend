@@ -30,7 +30,6 @@ function Board(props) {
   const [win, setWin] = useState(false);
   const [lost, setLost] = useState(false);
   const [message, setMessage] = useState("");
-  const [value,setValue]=useRecoilState(countState);
   const Navigate = useNavigate();
 
   useEffect(() => {
@@ -90,10 +89,10 @@ function Board(props) {
                   if (correctLetters === 5) {
                     setWin(true);
                     setTimeout(() => {
-                      setValue(7);
                       setMessage("You WIN");
-                      Navigate("/LEVEL-7");
-
+                      localStorage.setItem('count', 4 );
+                      console.log(parseInt(localStorage.getItem('count')));
+                      Navigate("/LEVEL-4");
                     }, 750);
                   }
                   return prevBoard;

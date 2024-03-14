@@ -2,6 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import { countState } from "../store/atoms/countState";
 import { useRecoilState } from "recoil";
 import { useNavigate } from 'react-router-dom';
+let value = parseInt(localStorage.getItem('count'));
+
 
 function GuessPass(){
   const [positions, setPositions] = useState(Array.from({ length: 10 }, () => ({ x: 0, y: 0 })));
@@ -64,6 +66,8 @@ function GuessPass(){
     console.log(value);
     if(value === 'ISDF@CRACK'){
       setValue1(6); 
+      localStorage.setItem('count', 6 );
+      console.log(parseInt(localStorage.getItem('count')));
       alert("You've found the password");
       Navigate('/LEVEL-6');
     }
