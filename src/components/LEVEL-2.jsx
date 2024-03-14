@@ -13,9 +13,9 @@ const Square = ({ value, onClick }) => (
 );
 
 const Board = ({ squares, onClick }) => (
-  <div className=" grid grid-cols-3 gap-32">
+  <div className="grid grid-cols-3 gap-32">
     {[0, 1, 2].map((row) => (
-      <div key={row} className=" ">
+      <div key={row}>
         {[0, 1, 2].map((col) => (
           <div key={col}>{<Square value={squares[row * 3 + col]} onClick={() => onClick(row * 3 + col)} />}</div>
         ))}
@@ -39,13 +39,21 @@ const Game = () => {
   const [winner, setWinner] = useState(null);
   const [playerWins, setPlayerWins] = useState(0);
   const [computerWins, setComputerWins] = useState(0);
-
+  let value = parseInt(localStorage.getItem('count'));
+  
   useEffect(() => {
     if (!xIsNext && !winner) {
       const computerMove = getBestMove(squares, xIsNext);
       makeMove(computerMove);
     }
   }, [xIsNext, winner, squares]);
+
+  useEffect(() => {
+    if (winner === 'X') {
+      
+      localStorage.setItem('count', value + 1 );
+    }
+  }, [winner]);
 
   const makeMove = (index) => {
     if (squares[index] || winner) {
@@ -76,7 +84,7 @@ const Game = () => {
 
   const status = winner ? `Winner: ${winner}` : `Next player: ${xIsNext ? 'You' : 'Computer'}`;
 
-  return count >= 2 ? (
+  return value >= 2 ? (
     <div style={{ 
       backgroundImage: `url('https://media.freestocktextures.com/cache/d7/d7/d7d72be81898a7f7b56681242cf3ee5b.jpg')`,
       height: '100vh',
@@ -94,7 +102,7 @@ const Game = () => {
         </button>
       </div>
     </div>
-  ) : (
+  ) : ( 
     <div className="h-screen flex justify-center items-center bg-gradient-to-r from-purple-400 via-pink-500 to-red-500">
       <div className="text-center">
         <p className="text-4xl font-bold mb-4">Oh you have not cracked the previous levels</p>
@@ -102,6 +110,7 @@ const Game = () => {
           <span className="bg-clip-text text-transparent bg-gradient-to-r from-green-400 via-pink-900 to-blue-500">Keep playing and try to crack the levels to unlock more fun!</span> 
         </p>
       </div>
+      <h1>{count}</h1>
     </div>
   );
 };
