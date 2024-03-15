@@ -128,7 +128,7 @@ export default function LEVEL8() {
   };
   const { width, height } = useWindowSize();
 
-  return value>=9 ? (
+  return value>=7 ? (
     <>
     <div>
     <h1 style={{display: 'flex',paddingTop: '1%'}}>Cybersecurity Crossword</h1>
