@@ -48,7 +48,7 @@ function LEVEL9() {
         Guess The Word 
       </div>
 
-      {value >= 9 ? (
+      {value >= 1 ? (
         <div className=" flex flex-col items-center justify-center">
           <form onSubmit={handleSubmit} className=" p-6 bg-black text-black rounded-md shadow-md">
             <input
