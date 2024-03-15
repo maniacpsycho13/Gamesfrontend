@@ -51,7 +51,7 @@ const Puzzle = () => {
     );
   };
 
-  return value>=0 ? (
+  return value>=9 ? (
     <div className=' ' style={{
       backgroundImage: `url('https://img.freepik.com/premium-vector/rgb-hexagonal-background_11469-76.jpg')`,
       backgroundPosition: 'center',

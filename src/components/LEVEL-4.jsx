@@ -31,7 +31,7 @@ const ImgReader = () => {
     };
 
     return (
-        value >= 5 ? (
+        value >= 4 ? (
             <div className="max-w-md mx-auto my-10 p-5 border rounded-lg shadow-lg bg-white">
                 <div className="mb-5">
                     <img src={comicImage} alt="Comic" className="mb-3 w-auto" />
@@ -39,7 +39,7 @@ const ImgReader = () => {
                 </div>
                 <div>
                     <button className="px-4 py-2 bg-blue-500 text-white font-bold rounded hover:bg-blue-700 transition-colors" onClick={handleSubmit}>
-                        Submit
+                        Submit 
                     </button>
                 </div>
                 {displayExif && exifData ? (

@@ -2,16 +2,25 @@ import React, {useState} from 'react';
 import '../assets/LEVEL-8.css';
 import { useWindowSize } from 'usehooks-ts';
 import Confetti from 'react-confetti';
+import { useNavigate } from 'react-router-dom';
 
 import Crossword, {ThemeProvider} from '@jaredreisinger/react-crossword';
+let value = parseInt(localStorage.getItem('count'));
+
 
 export default function LEVEL8() {
 
   const [isPuzzleComplete, setIsPuzzleComplete] = useState(false);
-
+  const navigate=useNavigate();
   const handleCrosswordCorrect = (isCorrect) => {
     setIsPuzzleComplete(isCorrect);
   };
+  const navigateToNextLevel = () => {
+    localStorage.setItem('count', 9 );
+    console.log(parseInt(localStorage.getItem('count')));
+    navigate('/LEVEL-8'); // Change '/next-level' to the appropriate route for the next level
+};
+
 
   const data = 
   {
@@ -119,7 +128,7 @@ export default function LEVEL8() {
   };
   const { width, height } = useWindowSize();
 
-  return(
+  return value>=9 ? (
     <>
     <div>
     <h1 style={{display: 'flex',paddingTop: '1%'}}>Cybersecurity Crossword</h1>
@@ -136,16 +145,28 @@ export default function LEVEL8() {
         highlightBackground: '#f99',
       }}
     >
-      <Crossword data={data} onCrosswordCorrect={handleCrosswordCorrect} />
       {isPuzzleComplete && (
-        //Put the code for going to next level here!
-          <Confetti
-          width={width}
-          height={height}
-        />
-        )}
+                        <>
+                            <Confetti width={width} height={height} />
+                            {/* Button to navigate to the next level */}
+                            <button onClick={navigateToNextLevel} className='rounded-2xl bg-blue-400 p-2 m-4'>Go to Next Level</button>
+                        </>
+                    )
+        }
+        <Crossword data={data} onCrosswordCorrect={handleCrosswordCorrect} />
+
       </ThemeProvider>
     </div>
     </>
+    ): ( 
+      <div className="h-screen flex justify-center items-center bg-gradient-to-r from-purple-400 via-pink-500 to-red-500">
+        <div className="text-center">
+          <p className="text-4xl font-bold mb-4">Oh you have not cracked the previous levels</p>
+          <p className="text-2xl font-bold">
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-green-400 via-pink-900 to-blue-500">Keep playing and try to crack the levels to unlock more fun!</span> 
+          </p>
+        </div>
+        <h1>{value}</h1>
+      </div>
     );
   }

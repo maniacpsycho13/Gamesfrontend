@@ -4,8 +4,8 @@ import { useRecoilState } from "recoil";
 import { motion } from "framer-motion";
 import y from '../assets/Arena.jpg';
 import { useNavigate } from 'react-router-dom';
-
-function LEVEL1() {
+let value1 = parseInt(localStorage.getItem('count'));
+function LEVEL9() {
   const [value, setValue] = useRecoilState(countState);
   const [response, setResponse] = useState('');
   const navigate = useNavigate();
@@ -18,7 +18,7 @@ function LEVEL1() {
     e.preventDefault();
     if (response.toLowerCase() === "cede") {
 
-      localStorage.setItem('count', 2);
+      localStorage.setItem('count', 9);
       console.log(localStorage.getItem('count'));
 
       alert("You've found the word");
@@ -31,7 +31,7 @@ function LEVEL1() {
     console.log('Form submitted with response:', response);
   };
 
-  return (
+  return value1>=8 ? (
     <div
       className="text-black relative flex flex-col justify-center items-center "
       style={{
@@ -48,7 +48,7 @@ function LEVEL1() {
         Guess The Word 
       </div>
 
-      {value >= 1 ? (
+      {value >= 9 ? (
         <div className=" flex flex-col items-center justify-center">
           <form onSubmit={handleSubmit} className=" p-6 bg-black text-black rounded-md shadow-md">
             <input
@@ -72,7 +72,17 @@ function LEVEL1() {
         </>
       )}
     </div>
+  ): ( 
+    <div className="h-screen flex justify-center items-center bg-gradient-to-r from-purple-400 via-pink-500 to-red-500">
+      <div className="text-center">
+        <p className="text-4xl font-bold mb-4">Oh you have not cracked the previous levels</p>
+        <p className="text-2xl font-bold">
+          <span className="bg-clip-text text-transparent bg-gradient-to-r from-green-400 via-pink-900 to-blue-500">Keep playing and try to crack the levels to unlock more fun!</span> 
+        </p>
+      </div>
+      <h1>{value}</h1>
+    </div>
   );
 }
 
-export default LEVEL1;
+export default LEVEL9;

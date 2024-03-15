@@ -106,7 +106,7 @@ function Level6() {
             <li>1. Just click on the block from where you want to move the number block </li>
             <li>2. And Click any of the remaining block to tranfer the block</li>
             <li>3. For Eg : If you click on block 1 and then on 2 then the Num Block will move from from 1 to 2 by using transfer button </li>
-            <li>4. In order to win this game you just have to put all number block in ascending order from top</li>
+            <li>4. In order to win this game you just have to put all number block in ascending order from top </li>
           </ul>
       </div>
     </>

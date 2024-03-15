@@ -15,6 +15,8 @@ import GuessPass from './components/LEVEL-5';
 
 import Puzzle from './components/LEVEL-7';
 import Level6 from './components/LEVEL-6';
+import LEVEL8 from './components/LEVEL-8';
+import LEVEL9 from './components/LEVEL-9';
 
 function App() {
   return (
@@ -30,8 +32,9 @@ function App() {
               <Route path = "/LEVEL-4" element = {<ImgReader/>}/>
               <Route path = "/LEVEL-5" element = {<GuessPass />} />
               <Route path = "/LEVEL-6" element = {<Level6/>}/>
-              <Route path = "/LEVEL-7" element = {<Puzzle/>}/>
-              
+              <Route path = "/LEVEL-7" element = {<LEVEL8/>}/>
+              <Route path ='/LEVEL-8'  element = {<LEVEL9 />} />
+              <Route path ='/LEVEL-9' element = { <Puzzle />} />
         </Routes>
       </BrowserRouter> 
     </div>
