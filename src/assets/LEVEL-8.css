@@ -22,14 +22,15 @@
     color: #535bf2;
   }
   
-  body {
+  .Crossy {
     margin: auto;
-    /* display: flex;
+    display: flex;
     justify-content: center;
-    align-items: center; */
-    /* place-items: center; */
+    align-items: center; 
+    place-items: center;
     min-width: 320px;
     min-height: 100vh;
+    
   }
   
   h1 {

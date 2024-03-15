@@ -130,8 +130,8 @@ export default function LEVEL8() {
 
   return value>=7 ? (
     <>
-    <div>
-    <h1 style={{display: 'flex',paddingTop: '1%'}}>Cybersecurity Crossword</h1>
+    <h1 className='text-xl py-[2%]' style={{display: 'flex',paddingTop: '1',alignContent: 'center', justifyContent: 'center'}}>Cybersecurity Crossword</h1>
+    <div className='Crossy'>
     <ThemeProvider
       theme={{
         allowNonSquare: true,
@@ -158,7 +158,8 @@ export default function LEVEL8() {
       </ThemeProvider>
     </div>
     </>
-    ): ( 
+    )
+    : ( 
       <div className="h-screen flex justify-center items-center bg-gradient-to-r from-purple-400 via-pink-500 to-red-500">
         <div className="text-center">
           <p className="text-4xl font-bold mb-4">Oh you have not cracked the previous levels</p>
