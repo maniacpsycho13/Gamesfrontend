@@ -2,7 +2,8 @@ import { useNavigate } from 'react-router-dom';
 import { Block, Button } from './BLOCK';
 import {levelArray} from './components/script';
 import {useState,useEffect} from 'react';
-let value1 = parseInt(localStorage.getItem('count'));
+import CryptoJS from 'crypto-js';
+// let value1 = parseInt(localStorage.getItem('count'));
 
 // import LEVEL6 from './LEVEL6';
 
@@ -15,8 +16,12 @@ function Level6() {
   const navigate = useNavigate();
   const [value,setValue] =useState(-1)
   useEffect(() => {
-    setValue(parseInt(localStorage.getItem('count')))
-  },[])
+    
+    const decrypted = CryptoJS.AES.decrypt(localStorage.getItem('count'), 'secret key').toString(CryptoJS.enc.Utf8);
+    setValue(parseInt(decrypted));
+    console.log(value);
+    // setValue(parseInt(localStorage.getItem('count')))
+  },[value])
   const [blocks, setBlocks] = useState(() =>{
     const intitialBlock = {
       1 : levelArray(1),
@@ -55,8 +60,10 @@ function Level6() {
       if(compareArrays(blocks[3],([5, 4, 3, 2, 1]))){
         setMessage2(`You Successfully Cleared The level in ${count+1} moves.`);
         if(level==5){
-          localStorage.setItem('count', 7 );
-          console.log(parseInt(localStorage.getItem('count')));
+          // localStorage.setItem('count', 7 );
+          // console.log(parseInt(localStorage.getItem('count')));
+          const encrypted = CryptoJS.AES.encrypt('7', 'secret key').toString();
+          localStorage.setItem('count', encrypted );
           navigate('/LEVEL-7');
         }
       }
@@ -110,7 +117,7 @@ function Level6() {
             <li>1. Just click on the block from where you want to move the number block </li>
             <li>2. And Click any of the remaining block to tranfer the block</li>
             <li>3. For Eg : If you click on block 1 and then on 2 then the Num Block will move from from 1 to 2 by using transfer button </li>
-            <li>4. In order to win this game you just have to put all number block in ascending order from top </li>
+            <li>4. In order to win this game you just have to put all number block in ascending order from top in <i className='font-bold'>BLOCK NO 3</i> </li>
           </ul>
       </div>
     </>

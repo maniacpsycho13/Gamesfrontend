@@ -4,12 +4,17 @@ import { useRecoilState } from "recoil";
 import { motion } from "framer-motion";
 import y from '../assets/Arena.jpg';
 import { useNavigate } from 'react-router-dom';
-let value1 = parseInt(localStorage.getItem('count'));
+import CryptoJS from 'crypto-js';
+// let value1 = parseInt(localStorage.getItem('count'));
 function LEVEL9() {
   const [value,setValue] =useState(-1)
   useEffect(() => {
-    setValue(parseInt(localStorage.getItem('count')))
-  },[])
+
+    // setValue(parseInt(localStorage.getItem('count')))
+    const decrypted = CryptoJS.AES.decrypt(localStorage.getItem('count'), 'secret key').toString(CryptoJS.enc.Utf8);
+    setValue(parseInt(decrypted));
+    console.log(value);
+  },[value])
   
   const [response, setResponse] = useState('');
   const navigate = useNavigate();
@@ -22,13 +27,14 @@ function LEVEL9() {
     e.preventDefault();
     if (response.toLowerCase() === "botnet") {
 
-      localStorage.setItem('count', 9);
-      console.log(localStorage.getItem('count'));
-
+      // localStorage.setItem('count', 9);
+      // console.log(localStorage.getItem('count'));
+      const encrypted = CryptoJS.AES.encrypt('9', 'secret key').toString();
+      localStorage.setItem('count', encrypted );
       alert("You've found the word");
       navigate('/LEVEL-9')
 
-      setValue(2); // Update value to 2 if "cede" is entered
+      // setValue(2); // Update value to 2 if "cede" is entered
 
     }
 

@@ -3,14 +3,18 @@ import loadImage from 'blueimp-load-image';
 import comicImage from '../assets/comic.png';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
+import CryptoJS from 'crypto-js';
 const ImgReader = () => {
     const navigate = useNavigate();
     const [exifData, setExifData] = useState(null);
     const [displayExif, setDisplayExif] = useState(false);
     const [value,setValue] =useState(-1)
     useEffect(() => {
-      setValue(parseInt(localStorage.getItem('count')))
-    },[])
+        const decrypted = CryptoJS.AES.decrypt(localStorage.getItem('count'), 'secret key').toString(CryptoJS.enc.Utf8);
+        setValue(parseInt(decrypted));
+        console.log(value);  
+    //   setValue(parseInt(localStorage.getItem('count')))
+    },[value])
     
 
     const parseInfo = (e) => {
@@ -26,8 +30,10 @@ const ImgReader = () => {
 
     const handleSubmit = () => {
         if (exifData && exifData.Model === 'NIKON D5300') {
-            localStorage.setItem('count', 5);
-            console.log(parseInt(localStorage.getItem('count')));
+            const encrypted = CryptoJS.AES.encrypt('5', 'secret key').toString();
+            localStorage.setItem('count', encrypted );
+            // localStorage.setItem('count', 5);
+            // console.log(parseInt(localStorage.getItem('count')));
             navigate('/Level-5');
             alert("You've found the image");
         }

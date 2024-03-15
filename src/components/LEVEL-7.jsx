@@ -4,15 +4,18 @@ import './Puzzle.css';
 import y from '../assets/Arena.jpg'
 
 import { useNavigate } from 'react-router-dom';
-
+import CryptoJS from 'crypto-js';
 // let value = parseInt(localStorage.getItem('count'));
 
 
 const Puzzle = () => {
   const [value,setValue] =useState(-1)
   useEffect(() => {
-    setValue(parseInt(localStorage.getItem('count')))
-  },[])
+    const decrypted = CryptoJS.AES.decrypt(localStorage.getItem('count'), 'secret key').toString(CryptoJS.enc.Utf8);
+    setValue(parseInt(decrypted));
+    console.log(value);
+    // setValue(parseInt(localStorage.getItem('count')))
+  },[value])
   const [tiles, setTiles] = useState([...Array(16).keys()]);
   const emptyTileIndex = tiles.indexOf(0);
   const isGameFinished = tiles.every((tile, index) => tile === index + 1) && tiles[15] === 0;
@@ -29,8 +32,10 @@ const Puzzle = () => {
     // Check if the game is already finished
     if (isGameFinished) {
       
-      localStorage.setItem('count', 8 );
-      console.log(parseInt(localStorage.getItem('count')));
+      // localStorage.setItem('count', 8 );
+      // console.log(parseInt(localStorage.getItem('count')));
+      const encrypted = CryptoJS.AES.encrypt('8', 'secret key').toString();
+      localStorage.setItem('count', encrypted );
       alert('Congratulations! You have completed the game.');
       Navigate('/LEVEL-8');
       return;
