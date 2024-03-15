@@ -2,11 +2,12 @@ import "../components/LEVEL6/src/App.css";
 import Game from "./LEVEL6/src/components/Game";
 import { useRecoilState } from 'recoil';
 import { countState } from '../store/atoms/countState';
-let value = parseInt(localStorage.getItem('count'));
+import { useState } from "react";
 
-
+const value = parseInt(localStorage.getItem('count'));
 function LEVEL61() {
-  const [count, setCount] = useRecoilState(countState);
+
+  
   const darkHandler = (dark) => {
     if (dark) document.documentElement.classList.add("dark");
     else document.documentElement.classList.remove("dark");

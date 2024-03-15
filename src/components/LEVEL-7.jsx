@@ -1,19 +1,24 @@
 // src/components/Puzzle.js
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Puzzle.css';
 import y from '../assets/Arena.jpg'
-import { useRecoilState } from 'recoil';
-import { countState } from '../store/atoms/countState';
+
 import { useNavigate } from 'react-router-dom';
-let value = parseInt(localStorage.getItem('count'));
+
+// let value = parseInt(localStorage.getItem('count'));
 
 
 const Puzzle = () => {
+  const [value,setValue] =useState(-1)
+  useEffect(() => {
+    setValue(parseInt(localStorage.getItem('count')))
+  },[])
   const [tiles, setTiles] = useState([...Array(16).keys()]);
   const emptyTileIndex = tiles.indexOf(0);
   const isGameFinished = tiles.every((tile, index) => tile === index + 1) && tiles[15] === 0;
-  const [count, setCount] = useRecoilState(countState);
+  
   const Navigate = useNavigate();
+  
   useEffect(() => {
     // Shuffle the tiles
     const shuffledTiles = [...Array(16).keys()].sort(() => Math.random() - 0.5);

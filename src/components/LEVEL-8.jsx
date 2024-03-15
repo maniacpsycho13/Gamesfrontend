@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState,useEffect} from 'react';
 import '../assets/LEVEL-8.css';
 import { useWindowSize } from 'usehooks-ts';
 import Confetti from 'react-confetti';
@@ -9,7 +9,10 @@ let value = parseInt(localStorage.getItem('count'));
 
 
 export default function LEVEL8() {
-
+  const [value,setValue] =useState(-1)
+  useEffect(() => {
+    setValue(parseInt(localStorage.getItem('count')))
+  },[])
   const [isPuzzleComplete, setIsPuzzleComplete] = useState(false);
   const navigate=useNavigate();
   const handleCrosswordCorrect = (isCorrect) => {

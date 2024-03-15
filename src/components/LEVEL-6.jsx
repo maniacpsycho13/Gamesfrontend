@@ -1,8 +1,8 @@
 import { useNavigate } from 'react-router-dom';
 import { Block, Button } from './BLOCK';
 import {levelArray} from './components/script';
-import {useState} from 'react';
-let value = parseInt(localStorage.getItem('count'));
+import {useState,useEffect} from 'react';
+let value1 = parseInt(localStorage.getItem('count'));
 
 // import LEVEL6 from './LEVEL6';
 
@@ -13,6 +13,10 @@ function Level6() {
   const [message2, setMessage2] = useState('');
   const [level, setLevel] = useState(1);  
   const navigate = useNavigate();
+  const [value,setValue] =useState(-1)
+  useEffect(() => {
+    setValue(parseInt(localStorage.getItem('count')))
+  },[])
   const [blocks, setBlocks] = useState(() =>{
     const intitialBlock = {
       1 : levelArray(1),

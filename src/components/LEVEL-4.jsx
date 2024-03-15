@@ -2,12 +2,16 @@ import React, { useState } from 'react';
 import loadImage from 'blueimp-load-image';
 import comicImage from '../assets/comic.png';
 import { useNavigate } from 'react-router-dom';
-
+import { useEffect } from 'react';
 const ImgReader = () => {
     const navigate = useNavigate();
     const [exifData, setExifData] = useState(null);
     const [displayExif, setDisplayExif] = useState(false);
-    const value = parseInt(localStorage.getItem('count'));
+    const [value,setValue] =useState(-1)
+    useEffect(() => {
+      setValue(parseInt(localStorage.getItem('count')))
+    },[])
+    
 
     const parseInfo = (e) => {
         const files = e.target.files;
