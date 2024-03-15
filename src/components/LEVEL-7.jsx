@@ -19,7 +19,18 @@ const Puzzle = () => {
   const [tiles, setTiles] = useState([...Array(16).keys()]);
   const emptyTileIndex = tiles.indexOf(0);
   const isGameFinished = tiles.every((tile, index) => tile === index + 1) && tiles[15] === 0;
-  
+  function isGameFinished3() {
+    let flag=true;
+    for(let i=0;i<15;i++){
+     console.log(tiles[i],i+1);
+     if(tiles[i]!=i+1){
+       flag=false;
+       break;
+     }
+    }
+    if(tiles[15]!=0)flag=false;
+    return flag;
+   }
   const Navigate = useNavigate();
   
   useEffect(() => {
@@ -30,14 +41,14 @@ const Puzzle = () => {
 
   const handleTileClick = (index) => {
     // Check if the game is already finished
-    if (isGameFinished) {
+    if (isGameFinished3()) {
       
       // localStorage.setItem('count', 8 );
       // console.log(parseInt(localStorage.getItem('count')));
-      const encrypted = CryptoJS.AES.encrypt('8', 'secret key').toString();
-      localStorage.setItem('count', encrypted );
+      // const encrypted = CryptoJS.AES.encrypt('8', 'secret key').toString();
+      // localStorage.setItem('count', encrypted );
       alert('Congratulations! You have completed the game.');
-      Navigate('/LEVEL-8');
+      // Navigate('/LEVEL-8');
       return;
     }
 
@@ -88,7 +99,7 @@ const Puzzle = () => {
     The 15 puzzle game involves arranging numbered tiles within a 4x4 grid by sliding them into the empty space. The objective is to order the tiles sequentially, with the empty space in the bottom right corner
     </div>
     </div>
-      {isGameFinished && <div className="game-finished">Game Finished!</div>}
+      {isGameFinished3() && <div className="game-finished">Game Finished!</div>}
     </div>
   ): (
     <div className="h-screen flex justify-center items-center bg-gradient-to-r from-purple-400 via-pink-500 to-red-500">
