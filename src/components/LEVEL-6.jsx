@@ -76,7 +76,7 @@ function Level6() {
       <div className="h-12 w-ful bg-green-500 z-10 px-5 flex items-center justify-around ">
         <p className='bg-green-800 text-white px-4 py-1 rounded-lg'> Number of Attempts : {count} </p>
         <div>
-        <select className='bg-black text-white px-3 py-1 rounded-lg' id='level-select' onChange={(e) => {setLevel(e.target.value); setBlocks({ ...blocks , 1: levelArray(e.target.value)}); handleReset;}}>
+        <select className='bg-black text-white px-3 py-1 rounded-lg' id='level-select' onChange={(e) => {setLevel(e.target.value); setBlocks({ ...blocks , 1: levelArray(e.target.value),2: [] ,3:[]});}}>
           {
             [1, 2, 3, 4, 5].map((value, index) => (
               <option key={index} value={value}>Level {value}</option>
