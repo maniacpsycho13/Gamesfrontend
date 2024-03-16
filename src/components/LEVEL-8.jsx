@@ -1,22 +1,32 @@
-import React, {useState} from 'react';
+import React, {useState,useEffect} from 'react';
 import '../assets/LEVEL-8.css';
 import { useWindowSize } from 'usehooks-ts';
 import Confetti from 'react-confetti';
 import { useNavigate } from 'react-router-dom';
 
 import Crossword, {ThemeProvider} from '@jaredreisinger/react-crossword';
-let value = parseInt(localStorage.getItem('count'));
+import CryptoJS from 'crypto-js';
+// let value = parseInt(localStorage.getItem('count'));
 
 
 export default function LEVEL8() {
-
+  const [value,setValue] =useState(-1)
+  useEffect(() => {
+    const decrypted = CryptoJS.AES.decrypt(localStorage.getItem('count'), 'secret key').toString(CryptoJS.enc.Utf8);
+    setValue(parseInt(decrypted));
+    console.log(value);
+    // setValue(parseInt(localStorage.getItem('count')))
+  },[value])
   const [isPuzzleComplete, setIsPuzzleComplete] = useState(false);
   const navigate=useNavigate();
   const handleCrosswordCorrect = (isCorrect) => {
     setIsPuzzleComplete(isCorrect);
   };
   const navigateToNextLevel = () => {
-    localStorage.setItem('count', 9 );
+    // localStorage.setItem('count', 9 );
+    // console.log(parseInt(localStorage.getItem('count')));
+    const encrypted = CryptoJS.AES.encrypt('8', 'secret key').toString();
+    localStorage.setItem('count', encrypted );
     console.log(parseInt(localStorage.getItem('count')));
     navigate('/LEVEL-8'); // Change '/next-level' to the appropriate route for the next level
 };

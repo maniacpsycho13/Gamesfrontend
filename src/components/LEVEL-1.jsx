@@ -1,14 +1,13 @@
-import React, { useState } from "react";
-import { countState } from "../store/atoms/countState";
-import { useRecoilState } from "recoil";
-import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 import y from '../assets/Arena.jpg';
 import { useNavigate } from 'react-router-dom';
+import CryptoJS from 'crypto-js'; 
 
 function LEVEL1() {
-  const [value, setValue] = useRecoilState(countState);
+  const [value, setValue] = useState(1);
   const [response, setResponse] = useState('');
   const navigate = useNavigate();
+
 
   const handleInputChange = (e) => {
     setResponse(e.target.value);
@@ -18,7 +17,8 @@ function LEVEL1() {
     e.preventDefault();
     if (response.toLowerCase() === "cede") {
 
-      localStorage.setItem('count', 2);
+      const encrypted = CryptoJS.AES.encrypt('2', 'secret key').toString();
+      localStorage.setItem('count', encrypted);
       console.log(localStorage.getItem('count'));
 
       alert("You've found the word");

@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { useRecoilState } from 'recoil';
-import { countState } from '../store/atoms/countState';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import CryptoJS from 'crypto-js';
+
 
 
 const Square = ({ value, onClick }) => (
@@ -27,21 +27,13 @@ const Board = ({ squares, onClick }) => (
 );
 
 const Game = () => {
-  const [count, setCount] = useRecoilState(countState);
-
-  useEffect(() => {
-    // Any side effect code can be placed here if needed
-    // This will be executed whenever count changes
-  }, [count]);
-
-  console.log(count);
-
   const [squares, setSquares] = useState(Array(9).fill(null));
   const [xIsNext, setXIsNext] = useState(true);
   const [winner, setWinner] = useState(null);
   const [playerWins, setPlayerWins] = useState(0);
   const [computerWins, setComputerWins] = useState(0);
-  let value = parseInt(localStorage.getItem('count'));
+  const decrypted = CryptoJS.AES.decrypt(localStorage.getItem('count'), 'secret key').toString(CryptoJS.enc.Utf8);
+  let value = parseInt(decrypted);
   
   useEffect(() => {
     if (!xIsNext && !winner) {
@@ -52,8 +44,8 @@ const Game = () => {
 
   useEffect(() => {
     if (winner === 'X') {
-      
-      localStorage.setItem('count', 3 );
+      const encrypted = CryptoJS.AES.encrypt('3', 'secret key').toString();
+      localStorage.setItem('count', encrypted );
       console.log(parseInt(localStorage.getItem('count')));
     }
   }, [winner]);
@@ -74,10 +66,9 @@ const Game = () => {
     if (currentWinner) {
       setWinner(currentWinner);
       if (currentWinner === 'X') {
-        localStorage.setItem('count', 3 );
-        console.log(parseInt(localStorage.getItem('count')));
         setPlayerWins(playerWins + 1);
-        setCount(3);
+        const encrypted = CryptoJS.AES.encrypt('3', 'secret key').toString();
+        localStorage.setItem('count', encrypted );
         Navigate('/LEVEL-3');
         
       } else if (currentWinner === 'O') {

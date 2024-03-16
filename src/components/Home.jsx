@@ -13,7 +13,10 @@ import levelImag9 from "../assets/LEVEL-9.png";
 
 import { RecoilRoot } from 'recoil';
 import { BrowserRouter, Route, Routes, useNavigate } from 'react-router-dom';
+// import CryptoJS from 'crypto-js';
 
+// const encrypted = CryptoJS.AES.encrypt('1', 'secret key').toString();
+// localStorage.setItem('count', encrypted);
 function Header() {
   const controls = useAnimation();
 

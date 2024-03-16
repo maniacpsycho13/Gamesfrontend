@@ -4,6 +4,7 @@ import words from "../../words";
 import { countState } from "../../../../../../src/store/atoms/countState";
 import { useRecoilState } from "recoil";
 import { useNavigate } from 'react-router-dom';
+import CryptoJS from "crypto-js";
 
 const correct =
   words[Math.floor(Math.random() * words.length - 1)].toUpperCase();
@@ -90,8 +91,10 @@ function Board(props) {
                     setWin(true);
                     setTimeout(() => {
                       setMessage("You WIN");
-                      localStorage.setItem('count', 4 );
-                      console.log(parseInt(localStorage.getItem('count')));
+                      const encrypted = CryptoJS.AES.encrypt('4', 'secret key').toString();
+                      localStorage.setItem('count', encrypted );
+                      // localStorage.setItem('count', 4 );
+                      // console.log(parseInt(localStorage.getItem('count')));
                       Navigate("/LEVEL-4");
                     }, 750);
                   }

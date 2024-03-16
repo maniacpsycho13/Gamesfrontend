@@ -1,12 +1,20 @@
 import "../components/LEVEL6/src/App.css";
 import Game from "./LEVEL6/src/components/Game";
-import { useRecoilState } from 'recoil';
-import { countState } from '../store/atoms/countState';
-let value = parseInt(localStorage.getItem('count'));
+import { useEffect, useState } from "react";
+import CryptoJS from 'crypto-js';
+
 
 
 function LEVEL61() {
-  const [count, setCount] = useRecoilState(countState);
+  const [value, setValue] = useState(-1);
+
+  useEffect(() => {
+    const decrypted = CryptoJS.AES.decrypt(localStorage.getItem('count'), 'secret key').toString(CryptoJS.enc.Utf8);
+    setValue(parseInt(decrypted));
+    console.log(value);
+  }, [value]);
+
+  
   const darkHandler = (dark) => {
     if (dark) document.documentElement.classList.add("dark");
     else document.documentElement.classList.remove("dark");
