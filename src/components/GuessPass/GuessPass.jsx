@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-
+import CryptoJS from 'crypto-js';
 
 
 function GuessPass(){
@@ -62,12 +62,16 @@ function GuessPass(){
   function clickHandler(e){
     e.preventDefault();
     console.log(value);
-    if(value === 'ISDF@CRACK'){
+    if(value.toLowerCase() === 'isdf@crack'){
       
-      localStorage.setItem('count', 6 );
-      console.log(parseInt(localStorage.getItem('count')));
+      const encrypted = CryptoJS.AES.encrypt('6', 'secret key').toString();
+      localStorage.setItem('count', encrypted );
+      // localStorage.setItem('count', 6 );
+      // console.log(parseInt(localStorage.getItem('count')));
       alert("You've found the password");
       Navigate('/LEVEL-6');
+    }else{
+      alert("Wrong Password");
     }
     
   }
