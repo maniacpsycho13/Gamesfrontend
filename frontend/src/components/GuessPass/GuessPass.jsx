@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import CryptoJS from 'crypto-js';
+import  axios  from 'axios';
 
 
 function GuessPass(){
@@ -59,10 +60,15 @@ function GuessPass(){
   const colors = ['#ff0000', '#00ff00', '#0000ff', '#000', '#00ffff', '#ff00ff', '#888888', '#f00f00', '#ffa500', '#800080'];
   const alphabets = ['@', 'K', 'C', 'A', 'D', 'F', 'C', 'R', 'I', 'S'];
 
-  function clickHandler(e){
+  async function senddatafrombackend(response){
+    const data=await axios.post('/api/ans/level5', { level5ans: response })
+    return data.data;
+  }
+  async function clickHandler(e){
     e.preventDefault();
     console.log(value);
-    if(value.toLowerCase() === 'isdf@crack'){
+    const {message}=await senddatafrombackend(value.toLowerCase());
+    if(message){
       
       const encrypted = CryptoJS.AES.encrypt('6', 'secret key').toString();
       localStorage.setItem('count', encrypted );

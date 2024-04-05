@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import y from '../assets/Arena.jpg';
 import { useNavigate } from 'react-router-dom';
 import CryptoJS from 'crypto-js';
+import axios from 'axios';
 // let value1 = parseInt(localStorage.getItem('count'));
 function LEVEL9() {
   const [value,setValue] =useState(-1)
@@ -18,14 +19,20 @@ function LEVEL9() {
   
   const [response, setResponse] = useState('');
   const navigate = useNavigate();
+  async function senddatafrombackend(response){
+    const data=await axios.post('/api/ans/level9', { level9ans: response })
+    return data.data;
+  }
 
   const handleInputChange = (e) => {
+
     setResponse(e.target.value);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit =async (e) => {
     e.preventDefault();
-    if (response.toLowerCase() === "botnet") {
+    const {message}=await senddatafrombackend(response.toLowerCase());
+    if (message) {
 
       // localStorage.setItem('count', 9);
       // console.log(localStorage.getItem('count'));
@@ -36,6 +43,8 @@ function LEVEL9() {
 
       // setValue(2); // Update value to 2 if "cede" is entered
 
+    }else{
+      alert("Wrong Password");
     }
 
     console.log('Form submitted with response:', response);

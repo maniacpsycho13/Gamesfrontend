@@ -1,21 +1,33 @@
 import { useEffect, useState } from "react";
 import y from '../assets/Arena.jpg';
 import { useNavigate } from 'react-router-dom';
-import CryptoJS from 'crypto-js'; 
+import CryptoJS from 'crypto-js';
+import axios from 'axios'; 
 
 function LEVEL1() {
   const [value, setValue] = useState(1);
   const [response, setResponse] = useState('');
   const navigate = useNavigate();
 
+  async function senddatafrombackend(response){
+    const data=await axios.post('/api/ans/level1', { level1ans: response })
+    return data.data;
+
+  }
 
   const handleInputChange = (e) => {
     setResponse(e.target.value);
+
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (response.toLowerCase() === "cede") {
+    
+    
+    const {message} = await senddatafrombackend(response.toLowerCase());
+    console.log(message);
+    
+    if (message) {
 
       const encrypted = CryptoJS.AES.encrypt('2', 'secret key').toString();
       localStorage.setItem('count', encrypted);
@@ -26,10 +38,13 @@ function LEVEL1() {
 
       setValue(2); // Update value to 2 if "cede" is entered
 
+    }else{
+
+      alert("Wrong Word");
     }
 
     console.log('Form submitted with response:', response);
-  };
+  }
 
   return (
     <div
